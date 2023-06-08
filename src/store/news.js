@@ -19,7 +19,6 @@ async function fetchNews(setError) {
 async function fetchSources(setError) {
   try {
     const response = await axios.get(`https://newsapi.org/v2/sources?apiKey=${API_KEY}`);
-    console.log('===fetchSources: ', response);
     return response.data.articles;
   } catch (error) {
     console.error(error);
@@ -33,7 +32,6 @@ async function fetchSearchResults(searchText, setError) {
     const response = await axios.get(
       `https://newsapi.org/v2/top-headlines?q=${searchText}&apiKey=${API_KEY}`,
     );
-    console.log('===fetchSearchResults: ', response);
     return response.data.articles;
   } catch (error) {
     console.error(error);
