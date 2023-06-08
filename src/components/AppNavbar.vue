@@ -22,7 +22,7 @@ function goToHistory() {
 }
 
 function goToSearch() {
-  if (!isHistoryPage.value) {
+  if (!isSearchPage.value) {
     router.push('/search');
   }
 }

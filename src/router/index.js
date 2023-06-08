@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: '/news/:newsId',
       name: 'NewsDetails',
-      component: () => import('../views/NewsDetailsPage.vue'),
+      component: () => import('../views/NewsDetailsPage/PageComponent.vue'),
     },
   ],
 });

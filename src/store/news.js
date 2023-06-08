@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-const API_KEY = '099148be22804e849a0c6fe022b7cf5e';
+// const API_KEY = '099148be22804e849a0c6fe022b7cf5e';
+const API_KEY = '9ceef681449741b4af90c27d14b94297';
 
 async function fetchNews(setError) {
   try {
@@ -19,7 +20,7 @@ async function fetchNews(setError) {
 async function fetchSources(setError) {
   try {
     const response = await axios.get(`https://newsapi.org/v2/sources?apiKey=${API_KEY}`);
-    return response.data.articles;
+    return response.data.sources;
   } catch (error) {
     console.error(error);
     setError(error);
@@ -66,16 +67,16 @@ const actions = {
     commit('setNewsLoading', false);
   },
   setCurrentArticle({ state, commit }, newsId) {
-    const article = state.news.value.find((item) => item.newsId === newsId);
+    const article = state.news.find((item) => item.newsId === newsId);
     commit('setCurrentArticle', article);
   },
-  addHistory({ commit }, newsId) {
-    if (state.currentArticle?.newsId === newsId) {
+  addHistory({ commit, state }, newsId) {
+    const isExist = state.histories.find((item) => item.newsId === newsId);
+    if (state.currentArticle?.newsId === newsId && !isExist) {
       commit('addHistory', state.currentArticle);
     }
   },
   changeTitle({ commit }, text) {
-    console.log('===changeTitle: ', text);
     commit('setTitle', text);
   },
   async getSources({ commit }, setError) {
